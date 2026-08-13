@@ -1,0 +1,52 @@
+name: Deploy static site
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out site
+        uses: actions/checkout@v4
+
+      - name: Create browser API configuration
+        shell: bash
+        env:
+          API_BASE_URL: ${{ vars.API_BASE_URL }}
+        run: |
+          if [[ -z "$API_BASE_URL" ]]; then
+            echo "Repository variable API_BASE_URL is required." >&2
+            exit 1
+          fi
+          if [[ ! "$API_BASE_URL" =~ ^https?:// ]]; then
+            echo "API_BASE_URL must start with http:// or https://." >&2
+            exit 1
+          fi
+          node -e 'const fs = require("fs"); fs.writeFileSync("env.js", "// Generated during deployment. Do not store secrets here.\\nexport const API_BASE_URL = " + JSON.stringify(process.env.API_BASE_URL) + ";\\n");'
+
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload site artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
