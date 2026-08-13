@@ -1,0 +1,176 @@
+.login-box{
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 400px;
+	height: 450px;
+	background-color: orangered;
+	border-radius: 10px;
+	display: none;
+	justify-content: center;
+	align-items: center;
+	z-index: 150;
+	pointer-events: auto;
+  overflow: auto;
+}
+#login-close{
+	color: orangered;
+	border-radius: 50%;
+	font-weight: 600;
+	font-size: 2em;
+	cursor: pointer;
+	background-color: #fff;
+
+}
+.login-box h2{
+	font-size: 2em;
+	color: white;
+	text-align: center;
+}
+.input-box{
+	width: 310px;
+	margin: 30px 0;
+	border-bottom: 2px solid #fff;
+	position: relative;
+}
+.input-box label{
+	position: absolute;
+	top: 50%;
+	left: 5px;
+	transform: translateY(-50%);
+	font-size: 1em;
+	color: #fff;
+	pointer-events: none;
+	transition: all .5s ease-in-out;
+}
+.input-box input{
+	width: 100%;
+	height: 50px;
+	background-color: transparent;
+	border: none;
+	outline: none;
+	font-size: 1em;
+	color: #fff;
+	padding: 0 35px 0 5px;
+}
+.input-box .icon{
+	position: absolute;
+	right: 8px;
+	color: #fff;
+	font-size: 1.2em;
+	line-height: 57px;
+}
+.input-box input:focus~label,
+.input-box input:valid~label{
+	top: -5px;
+}
+.remember-forget{
+	margin: -15px 0 15px;
+	font-size: .9em;
+	color: #fff;
+	display: flex;
+	justify-content: space-between;
+}
+.remember-forget label{
+	display: flex;
+	align-items: center;
+}
+.remember-forget label input{
+	margin-right: 5px;
+}
+.remember-forget a{
+	color: #fff;
+	text-decoration: none;
+}
+.remember-forget a:hover{
+	text-decoration: underline;
+}
+.btn{
+	width: 100%;
+	height: 40px;
+	background-color: #fff;
+	border: none;
+	outline: none;
+	border-radius: 40px;
+	font-size: 1em;
+	cursor: pointer;
+	color: #000;
+	font-weight: 500;
+}
+.register-link{
+	font-size: .9em;
+	color: #fff;
+	text-align: center;
+	margin: 25px 0 10px;
+}
+.register-link p a{
+	color: #fff;
+	font-weight: 600;
+}
+.register-link p a:hover{
+	text-decoration: underline;
+}
+
+
+/* ALERT MODAL WINDOW */
+.alert-modal-wrapper {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%;
+  max-width: 360px;
+  background: #ffffff;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  z-index: 10001; /* Must sit higher than backdrop */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+	pointer-events: auto;
+  animation: modalScaleIn 0.3s ease-out forwards;
+}
+
+.alert-modal-wrapper ion-icon {
+  font-size: 45px;
+  color: #ff4d4d; /* Soft red for warning */
+}
+
+.alert-modal-wrapper h3 {
+  font-size: 1.2rem;
+  margin: 0;
+  color: #333;
+}
+
+.alert-modal-wrapper p {
+  font-size: 0.95rem;
+  color: #666;
+  margin: 0;
+  line-height: 1.4;
+}
+
+.alert-modal-wrapper .alert-btn {
+  background: #333;
+  color: #fff;
+  border: none;
+  padding: 10px 24px;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  width: 100%;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.alert-modal-wrapper .alert-btn:hover {
+  background: #000;
+}
+
+@keyframes modalScaleIn {
+  from { opacity: 0; transform: translate(-50%, -45%) scale(0.95); }
+  to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+}

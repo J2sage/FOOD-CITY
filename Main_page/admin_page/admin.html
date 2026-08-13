@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Dashboard - Food city</title>
+  <link rel="shortcut icon" href="../../Main_page/icons/foodcityng_logo.jpg" sizes="532x32" type="image/x-icon">
+  <link rel="stylesheet" href="admin.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header class="admin-header-container">
+    <div class="admin-header">
+      <div class="left">
+        <button class="sidebar-toggle" type="button" aria-label="Toggle sidebar">
+          <ion-icon name="menu"></ion-icon>
+        </button>
+        <div>
+          <h1>Admin Dashboard</h1>
+          <p>Welcome, admin. You are logged in.</p>
+        </div>
+      </div>
+      <div class="right">
+        <button class="home-btn" onclick="window.location.href='../../index.html'">Go to Home</button>
+        <button class="logout-btn"><ion-icon name="log-out"></ion-icon>Logout</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+
+    <nav class="side-bar" id="sidebar">
+      <button class="sidebar-close" type="button" aria-label="Close sidebar">
+        <ion-icon name="close"></ion-icon>
+      </button>
+      <a href="../../index.html"><img src="../../Main_page/assets/foodcity-logo.png" alt="Food City Logo" class="logo"></a>
+      <ul>
+        <li><a href="#dashboard" class="active"><ion-icon name="menu"></ion-icon><span>Dashboard</span></a></li>
+        <li><a href="menu.html" ><ion-icon name="restaurant"></ion-icon><span>Menu Items</span></a></li>
+        <li><a href="customer.html"><ion-icon name="people"></ion-icon><span>Customers</span></a></li>
+      </ul>
+    </nav>
+    <div class="sidebar-overlay"></div>
+    <section class="main-container">
+      <section class="wrap-container">
+        <section class="wrap">
+          <div class="wrap-left">
+            <h1><ion-icon name="clipboard"></ion-icon> Order Dashboard</h1>
+            <span class="badge"><ion-icon name="time"></ion-icon> Live updates</span>
+          </div>
+          <div class="header-actions">
+            <input type="text" placeholder="Search order # or customer..." id="searchInput" />
+            <button class="refresh-btn">
+              <ion-icon name="sync"></ion-icon> Refresh
+            </button>
+          </div>
+        </section>
+      </section>
+
+      <!-- ===== STATS ===== -->
+      <div class="stats-grid">
+        <div class="stat-card pending">
+          <div class="stat-number" id="countReceived">3</div>
+          <div class="stat-label"><ion-icon name="time"></ion-icon> Order Confirmed</div>
+        </div>
+        <div class="stat-card preparing">
+          <div class="stat-number" id="countPreparing">2</div>
+          <div class="stat-label"><ion-icon name="restaurant"></ion-icon> Being Prepared</div>
+        </div>
+        <div class="stat-card delivering">
+          <div class="stat-number" id="countDelivering">4</div>
+          <div class="stat-label"><ion-icon name="bus"></ion-icon> On the Way</div>
+        </div>
+        <div class="stat-card delivered">
+          <div class="stat-number" id="countDelivered">12</div>
+          <div class="stat-label"><ion-icon name="checkmark-circle"></ion-icon> Delivered</div>
+        </div>
+      </div>
+
+      <!-- order-section -->
+      <section class="order-section">
+        <div class="order-section-top">
+          <h2><ion-icon name="list"></ion-icon> All Orders</h2>
+          <div class="filter-buttons">
+            <button class="active" data-filter="all">All</button>
+            <button data-filter="received">Confirmed</button>
+            <button data-filter="preparing">Preparing</button>
+            <button data-filter="on-the-way">On-the-Way</button>
+            <button data-filter="delivered">Delivered</button>
+          </div>
+        </div>
+        
+
+        <div class="order-table">
+          <table>
+            <thead>
+              <tr>
+                <th>Order ID</th>
+                <th>Customer</th>
+                <th>Items</th>
+                <th>Total</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody id="admin-list">
+              
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <script src="../../login.js" type="module" defer></script>
+  <script src="./script/admin.js" type="module" defer></script>
+  <script src="admin-sidebar.js" defer></script>
+  <script type="module" src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule="" src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons/ionicons.js"></script>
+</body>
+</html>

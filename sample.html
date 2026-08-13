@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin — Order Management</title>
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+      /* ===== RESET & BASE ===== */
+      * {
+          margin: 0;
+          padding: 0;
+          box-sizing: border-box;
+      }
+
+      body {
+          font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+          background: #f4f6fa;
+          color: #1e293b;
+          padding: 24px;
+      }
+
+      .admin-container {
+          max-width: 1400px;
+          margin: 0 auto;
+      }
+
+      /* ===== HEADER ===== */
+      .admin-header {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin-bottom: 30px;
+          flex-wrap: wrap;
+          gap: 16px;
+      }
+
+      .admin-header h1 {
+          font-size: 28px;
+          font-weight: 700;
+          display: flex;
+          align-items: center;
+          gap: 10px;
+      }
+
+      .admin-header h1 i {
+          color: #3b82f6;
+      }
+
+      .admin-header .badge {
+          background: #e2e8f0;
+          padding: 6px 14px;
+          border-radius: 20px;
+          font-size: 14px;
+          font-weight: 600;
+          color: #475569;
+      }
+
+      .header-actions {
+          display: flex;
+          gap: 12px;
+          align-items: center;
+      }
+
+      .header-actions input {
+          padding: 10px 16px;
+          border: 1px solid #d1d5db;
+          border-radius: 8px;
+          font-size: 14px;
+          width: 220px;
+          background: white;
+      }
+
+      .header-actions input:focus {
+          outline: 2px solid #3b82f6;
+          border-color: transparent;
+      }
+
+      /* ===== STATS CARDS ===== */
+      .stats-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+          gap: 18px;
+          margin-bottom: 32px;
+      }
+
+      .stat-card {
+          background: white;
+          padding: 20px 18px;
+          border-radius: 14px;
+          box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+          border-left: 5px solid #3b82f6;
+          transition: 0.2s;
+      }
+
+      .stat-card:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 6px 18px rgba(0,0,0,0.07);
+      }
+
+      .stat-card .stat-number {
+          font-size: 30px;
+          font-weight: 700;
+      }
+
+      .stat-card .stat-label {
+          font-size: 14px;
+          color: #64748b;
+          margin-top: 4px;
+      }
+
+      .stat-card.pending { border-left-color: #f59e0b; }
+      .stat-card.preparing { border-left-color: #8b5cf6; }
+      .stat-card.delivering { border-left-color: #3b82f6; }
+      .stat-card.delivered { border-left-color: #22c55e; }
+
+      /* ===== ORDER TABLE ===== */
+      .orders-section {
+          background: white;
+          border-radius: 16px;
+          box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+          padding: 24px;
+          overflow-x: auto;
+      }
+
+      .orders-section .section-top {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin-bottom: 20px;
+          flex-wrap: wrap;
+          gap: 12px;
+      }
+
+      .orders-section .section-top h2 {
+          font-size: 20px;
+          font-weight: 600;
+      }
+
+      .filter-buttons {
+          display: flex;
+          gap: 8px;
+          flex-wrap: wrap;
+      }
+
+      .filter-buttons button {
+          padding: 6px 16px;
+          border: 1px solid #d1d5db;
+          border-radius: 20px;
+          background: white;
+          font-size: 13px;
+          font-weight: 500;
+          cursor: pointer;
+          transition: 0.2s;
+          color: #475569;
+      }
+
+      .filter-buttons button:hover {
+          background: #f1f5f9;
+      }
+
+      .filter-buttons button.active {
+          background: #3b82f6;
+          color: white;
+          border-color: #3b82f6;
+      }
+
+      /* ===== TABLE ===== */
+      table {
+          width: 100%;
+          border-collapse: collapse;
+          font-size: 14px;
+      }
+
+      thead {
+          background: #f8fafc;
+          border-radius: 10px;
+      }
+
+      th {
+          text-align: left;
+          padding: 14px 12px;
+          font-weight: 600;
+          color: #475569;
+          border-bottom: 2px solid #e2e8f0;
+      }
+
+      td {
+          padding: 16px 12px;
+          border-bottom: 1px solid #f1f5f9;
+          vertical-align: middle;
+      }
+
+      tr:hover td {
+          background: #fafcff;
+      }
+
+      .order-id {
+          font-weight: 600;
+          color: #1e293b;
+      }
+
+      .customer {
+          display: flex;
+          flex-direction: column;
+      }
+
+      .customer .name {
+          font-weight: 500;
+      }
+
+      .customer .email {
+          font-size: 12px;
+          color: #94a3b8;
+      }
+
+      /* ===== STATUS BADGE ===== */
+      .status-badge {
+          display: inline-flex;
+          align-items: center;
+          gap: 6px;
+          padding: 5px 14px;
+          border-radius: 20px;
+          font-size: 13px;
+          font-weight: 600;
+      }
+
+      .status-badge.received {
+          background: #fef3c7;
+          color: #92400e;
+      }
+
+      .status-badge.preparing {
+          background: #ede9fe;
+          color: #5b21b6;
+      }
+
+      .status-badge.delivering {
+          background: #dbeafe;
+          color: #1e40af;
+      }
+
+      .status-badge.delivered {
+          background: #d1fae5;
+          color: #065f46;
+      }
+
+      /* ===== PROGRESS BAR (mini) ===== */
+      .progress-mini {
+          display: flex;
+          align-items: center;
+          gap: 6px;
+          min-width: 120px;
+      }
+
+      .progress-mini .bar-track {
+          flex: 1;
+          height: 5px;
+          background: #e2e8f0;
+          border-radius: 4px;
+          overflow: hidden;
+          min-width: 60px;
+      }
+
+      .progress-mini .bar-track .bar-fill {
+          height: 100%;
+          border-radius: 4px;
+          background: #3b82f6;
+          transition: width 0.4s ease;
+      }
+
+      .progress-mini .percent {
+          font-size: 13px;
+          font-weight: 600;
+          color: #475569;
+          min-width: 36px;
+      }
+
+      /* ===== ACTION BUTTONS ===== */
+      .action-btns {
+          display: flex;
+          gap: 6px;
+          flex-wrap: wrap;
+      }
+
+      .action-btns button {
+          padding: 5px 12px;
+          border: none;
+          border-radius: 6px;
+          font-size: 12px;
+          font-weight: 600;
+          cursor: pointer;
+          transition: 0.2s;
+          background: #f1f5f9;
+          color: #334155;
+      }
+
+      .action-btns button:hover {
+          background: #e2e8f0;
+      }
+
+      .action-btns .btn-next {
+          background: #3b82f6;
+          color: white;
+      }
+
+      .action-btns .btn-next:hover {
+          background: #2563eb;
+      }
+
+      .action-btns .btn-deliver {
+          background: #22c55e;
+          color: white;
+      }
+
+      .action-btns .btn-deliver:hover {
+          background: #16a34a;
+      }
+
+      .action-btns .btn-view {
+          background: #f1f5f9;
+          color: #475569;
+      }
+
+      /* ===== RESPONSIVE ===== */
+      @media (max-width: 768px) {
+          .admin-header {
+              flex-direction: column;
+              align-items: stretch;
+          }
+
+          .header-actions {
+              flex-direction: column;
+              width: 100%;
+          }
+
+          .header-actions input {
+              width: 100%;
+          }
+
+          .stats-grid {
+              grid-template-columns: repeat(2, 1fr);
+          }
+
+          .orders-section {
+              padding: 16px;
+          }
+
+          table {
+              font-size: 13px;
+          }
+
+          .action-btns button {
+              font-size: 11px;
+              padding: 4px 10px;
+          }
+      }
+
+      @media (max-width: 480px) {
+          .stats-grid {
+              grid-template-columns: 1fr;
+          }
+      }
+  </style>
+</head>
+<body>
+
+<div class="admin-container">
+
+    <!-- ===== HEADER ===== -->
+    <header class="admin-header">
+        <div>
+            <h1><i class="fas fa-clipboard-list"></i> Order Dashboard</h1>
+            <span class="badge"><i class="far fa-clock"></i> Live updates</span>
+        </div>
+        <div class="header-actions">
+            <input type="text" placeholder="Search order # or customer..." id="searchInput" />
+            <button style="background:#3b82f6;color:white;border:none;padding:10px 18px;border-radius:8px;font-weight:600;cursor:pointer;">
+                <i class="fas fa-sync-alt"></i> Refresh
+            </button>
+        </div>
+    </header>
+
+    <!-- ===== STATS ===== -->
+    <div class="stats-grid">
+        <div class="stat-card pending">
+            <div class="stat-number" id="countReceived">3</div>
+            <div class="stat-label"><i class="far fa-clock"></i> Order Confirmed</div>
+        </div>
+        <div class="stat-card preparing">
+            <div class="stat-number" id="countPreparing">2</div>
+            <div class="stat-label"><i class="fas fa-utensils"></i> Being Prepared</div>
+        </div>
+        <div class="stat-card delivering">
+            <div class="stat-number" id="countDelivering">4</div>
+            <div class="stat-label"><i class="fas fa-truck"></i> On the Way</div>
+        </div>
+        <div class="stat-card delivered">
+            <div class="stat-number" id="countDelivered">12</div>
+            <div class="stat-label"><i class="fas fa-check-circle"></i> Delivered</div>
+        </div>
+    </div>
+
+    <!-- ===== ORDERS TABLE ===== -->
+    <section class="orders-section">
+        <div class="section-top">
+            <h2><i class="fas fa-list-ul"></i> All Orders</h2>
+            <div class="filter-buttons">
+                <button class="active" data-filter="all">All</button>
+                <button data-filter="received">Confirmed</button>
+                <button data-filter="preparing">Preparing</button>
+                <button data-filter="delivering">On the Way</button>
+                <button data-filter="delivered">Delivered</button>
+            </div>
+        </div>
+
+        <div style="overflow-x:auto;">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Order ID</th>
+                        <th>Customer</th>
+                        <th>Items</th>
+                        <th>Total</th>
+                        <th>Status</th>
+                        <th>Progress</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="orderTableBody">
+                    <!-- Rows injected by JS -->
+                </tbody>
+            </table>
+        </div>
+
+        <div style="margin-top:16px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;">
+            <span style="color:#94a3b8;font-size:14px;" id="orderCount">Showing 0 orders</span>
+            <div style="display:flex;gap:6px;">
+                <button style="padding:6px 14px;border:1px solid #d1d5db;border-radius:6px;background:white;cursor:pointer;">Prev</button>
+                <button style="padding:6px 14px;border:1px solid #d1d5db;border-radius:6px;background:#3b82f6;color:white;cursor:pointer;">1</button>
+                <button style="padding:6px 14px;border:1px solid #d1d5db;border-radius:6px;background:white;cursor:pointer;">2</button>
+                <button style="padding:6px 14px;border:1px solid #d1d5db;border-radius:6px;background:white;cursor:pointer;">Next</button>
+            </div>
+        </div>
+    </section>
+</div>
+
+<script>
+    // ============================================================
+    //  DATA
+    // ============================================================
+    const statusFlow = ['received', 'preparing', 'delivering', 'delivered'];
+
+    const statusLabels = {
+        received: { label: 'Order Confirmed', class: 'received', icon: 'fa-clock', percent: 25 },
+        preparing: { label: 'Being Prepared', class: 'preparing', icon: 'fa-utensils', percent: 50 },
+        delivering: { label: 'On the Way', class: 'delivering', icon: 'fa-truck', percent: 75 },
+        delivered: { label: 'Delivered!', class: 'delivered', icon: 'fa-check-circle', percent: 100 },
+    };
+
+    // Sample orders
+    let orders = [
+        { id: '#1001', customer: 'Sarah Johnson', email: 'sarah@example.com', items: '2x Pizza, 1x Soda', total: '$42.50', status: 'received' },
+        { id: '#1002', customer: 'Mike Chen', email: 'mike@example.com', items: '1x Burger, 1x Fries', total: '$18.75', status: 'preparing' },
+        { id: '#1003', customer: 'Emily Davis', email: 'emily@example.com', items: '3x Tacos, 2x Drink', total: '$31.20', status: 'delivering' },
+        { id: '#1004', customer: 'James Wilson', email: 'james@example.com', items: '1x Pasta, 1x Salad', total: '$24.00', status: 'delivered' },
+        { id: '#1005', customer: 'Amanda Lee', email: 'amanda@example.com', items: '4x Sushi Rolls', total: '$56.80', status: 'received' },
+        { id: '#1006', customer: 'Robert Park', email: 'robert@example.com', items: '2x Sandwich, 1x Soup', total: '$29.40', status: 'preparing' },
+        { id: '#1007', customer: 'Jessica Kim', email: 'jessica@example.com', items: '1x Steak, 1x Veggies', total: '$48.90', status: 'delivering' },
+        { id: '#1008', customer: 'David Brown', email: 'david@example.com', items: '3x Chicken Wings', total: '$27.60', status: 'delivered' },
+        { id: '#1009', customer: 'Lisa Garcia', email: 'lisa@example.com', items: '2x Pasta, 2x Drink', total: '$38.20', status: 'delivering' },
+    ];
+
+    // ============================================================
+    //  RENDER FUNCTIONS
+    // ============================================================
+    function renderOrders(filter = 'all') {
+        const tbody = document.getElementById('orderTableBody');
+        const filtered = filter === 'all' ? orders : orders.filter(o => o.status === filter);
+
+        if (filtered.length === 0) {
+            tbody.innerHTML = `
+                <tr>
+                    <td colspan="7" style="text-align:center;padding:40px 0;color:#94a3b8;">
+                        <i class="fas fa-box-open" style="font-size:24px;display:block;margin-bottom:8px;"></i>
+                        No orders found
+                    </td>
+                </tr>
+            `;
+            document.getElementById('orderCount').textContent = 'Showing 0 orders';
+            return;
+        }
+
+        let html = '';
+        filtered.forEach(order => {
+            const info = statusLabels[order.status];
+            const nextStatus = getNextStatus(order.status);
+
+            html += `
+                <tr data-status="${order.status}">
+                    <td class="order-id">${order.id}</td>
+                    <td>
+                        <div class="customer">
+                            <span class="name">${order.customer}</span>
+                            <span class="email">${order.email}</span>
+                        </div>
+                    </td>
+                    <td>${order.items}</td>
+                    <td><strong>${order.total}</strong></td>
+                    <td>
+                        <span class="status-badge ${info.class}">
+                            <i class="fas ${info.icon}"></i> ${info.label}
+                        </span>
+                    </td>
+                    <td>
+                        <div class="progress-mini">
+                            <span style="font-size:13px;">${info.percent}%</span>
+                            <div class="bar-track">
+                                <div class="bar-fill" style="width:${info.percent}%;"></div>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="action-btns">
+                            ${nextStatus ? `
+                                <button class="btn-next" data-id="${order.id}" data-next="${nextStatus}">
+                                    <i class="fas fa-arrow-right"></i> ${getNextLabel(nextStatus)}
+                                </button>
+                            ` : `
+                                <button class="btn-deliver" disabled style="opacity:0.6;cursor:default;">
+                                    <i class="fas fa-check"></i> Complete
+                                </button>
+                            `}
+                            <button class="btn-view" data-id="${order.id}">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            `;
+        });
+
+        tbody.innerHTML = html;
+        document.getElementById('orderCount').textContent = `Showing ${filtered.length} of ${orders.length} orders`;
+
+        updateStats();
+        attachEventListeners();
+    }
+
+    function getNextStatus(current) {
+        const idx = statusFlow.indexOf(current);
+        return idx < statusFlow.length - 1 ? statusFlow[idx + 1] : null;
+    }
+
+    function getNextLabel(status) {
+        return statusLabels[status]?.label || status;
+    }
+
+    function updateStats() {
+        document.getElementById('countReceived').textContent = orders.filter(o => o.status === 'received').length;
+        document.getElementById('countPreparing').textContent = orders.filter(o => o.status === 'preparing').length;
+        document.getElementById('countDelivering').textContent = orders.filter(o => o.status === 'delivering').length;
+        document.getElementById('countDelivered').textContent = orders.filter(o => o.status === 'delivered').length;
+    }
+
+    // ============================================================
+    //  EVENT LISTENERS
+    // ============================================================
+    function attachEventListeners() {
+        // Next status buttons
+        document.querySelectorAll('.btn-next').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const id = this.dataset.id;
+                const next = this.dataset.next;
+                const order = orders.find(o => o.id === id);
+                if (order) {
+                    order.status = next;
+                    renderOrders(document.querySelector('.filter-buttons .active')?.dataset?.filter || 'all');
+                }
+            });
+        });
+
+        // View buttons (just alert for demo)
+        document.querySelectorAll('.btn-view').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const id = this.dataset.id;
+                const order = orders.find(o => o.id === id);
+                if (order) {
+                    alert(`📦 Order ${order.id}\nCustomer: ${order.customer}\nItems: ${order.items}\nTotal: ${order.total}\nStatus: ${statusLabels[order.status].label}`);
+                }
+            });
+        });
+    }
+
+    // ============================================================
+    //  FILTER BUTTONS
+    // ============================================================
+    document.querySelectorAll('.filter-buttons button').forEach(btn => {
+        btn.addEventListener('click', function() {
+            document.querySelectorAll('.filter-buttons button').forEach(b => b.classList.remove('active'));
+            this.classList.add('active');
+            renderOrders(this.dataset.filter);
+        });
+    });
+
+    // ============================================================
+    //  SEARCH
+    // ============================================================
+    document.getElementById('searchInput').addEventListener('input', function() {
+        const term = this.value.toLowerCase().trim();
+        const rows = document.querySelectorAll('#orderTableBody tr');
+        rows.forEach(row => {
+            const text = row.textContent.toLowerCase();
+            row.style.display = text.includes(term) ? '' : 'none';
+        });
+    });
+
+    // ============================================================
+    //  INIT
+    // ============================================================
+    renderOrders('all');
+</script>
+
+</body>
+</html>

@@ -1,0 +1,53 @@
+@media (max-width: 900px) {
+  .tab-links ul{
+    gap: 1em;
+    font-size: 0.8rem;
+  }
+  .tab-links .btn-1{
+  display: none;
+  }
+}
+
+@media (min-width: 0px) and (max-width: 768px) {
+  .story-hero{
+    flex-direction: column;
+  }
+  .story-box{
+    width: 100%;
+  }
+  .mission-box{
+    width: 100%;
+  }
+  .team-grid{
+    grid-template-columns: 1fr 1fr;
+  }
+}
+@media (max-width: 500px) {
+  .tab-links ul{
+    display: none;
+  }
+  .sidebar-control{
+    display: flex;
+    margin-left: 2em;
+  }
+  #close{
+    display: none;
+  }
+  .hero{
+    text-align: center;
+  }
+  .year{
+    margin-left: 0px;
+  }
+  .hero-stats{
+    justify-content: center;
+    align-items: center;
+  }
+  .team-grid{
+    grid-template-columns: 1fr;
+  }
+  .team h1{
+    flex-direction: column;
+    text-align: center;
+  }
+}

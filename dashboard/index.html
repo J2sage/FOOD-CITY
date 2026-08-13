@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Food City</title>
+  <link rel="stylesheet" href="index.css">
+  <link rel="stylesheet" href="responsiveness.css">
+  <link rel="shortcut icon" href="../Main_page/icons/foodcityng_logo.jpg" sizes="532x32" type="image/x-icon">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+</head>
+<body>
+  <nav class="side-bar" id="sidebar">
+    <button class="sidebar-close" type="button" aria-label="Close sidebar">
+      <ion-icon name="close"></ion-icon>
+    </button>
+    <a href="../index.html"><img src="../Main_page/assets/foodcity-logo.png" alt="Food City Logo" class="logo"></a>
+    <ul>
+      <li><a href="#dashboard" class="active"><ion-icon name="menu"></ion-icon><span>Dashboard</span></a></li>
+      <li><a href="../index.html"><ion-icon name="home"></ion-icon><span>Back to home</span></a></li>
+      <li><a href="../Menu_page/index.html"><ion-icon name="grid"></ion-icon><span>Menu</span></a></li>
+      <li><a href="order_page/order.html"><ion-icon name="cart"></ion-icon><span>Orders</span></a></li>
+      <li><a href="profile_page/profile.html"><ion-icon name="person"></ion-icon><span>Profile</span></a></li>
+    </ul>
+  </nav>
+  <main>
+    <div class="sidebar-overlay"></div>
+    
+    <section class="top">
+      <button class="sidebar-toggle" type="button" aria-label="Toggle sidebar">
+        <ion-icon name="menu"></ion-icon>
+      </button>
+      <div class="left">
+        <p class="initials">J</p>
+        <div class="user-info">
+          <p class="full-name">Jibril Balogun</p>
+          <p class="status">Customer</p>
+        </div>
+      </div>
+      <button class="logout-btn">
+        <ion-icon name="log-out"></ion-icon>
+        Logout
+      </button>
+    </section>
+
+    <section class="stat-grid">
+      <div class="card">
+        <p class="card-title"><ion-icon name="time"></ion-icon> Orders</p>
+        <h2 class="card-value orders-value">—</h2>
+        <p class="extra orders-extra">Loading…</p>
+      </div>
+      <div class="card">
+        <p class="card-title"><ion-icon name="heart"></ion-icon> Favorites</p>
+        <h2 class="card-value favorites-value">—</h2>
+        <p class="extra favorites-extra">Loading…</p>
+      </div>
+      <div class="card">
+        <p class="card-title"><ion-icon name="pricetag"></ion-icon> Rewards</p>
+        <h2 class="card-value rewards-value">—</h2>
+        <p class="extra rewards-extra">points</p>
+      </div>
+      <div class="card">
+        <p class="card-title"><ion-icon name="star"></ion-icon> Rating</p>
+        <h2 class="card-value rating-value">—</h2>
+        <p class="extra rating-extra">out of 5</p>
+      </div>
+
+    </section>
+
+    <section class="current-order">
+      <div class="section-title">
+        <h2><ion-icon name="cart"></ion-icon> Current Order</h2>
+
+      </div>
+      <div class="order-card">
+        <div class="order-info">
+          <p class="order-id">Order #12345</p>
+          <p class="order-date">Placed on: 2024-06-15</p>
+          <p class="order-status">Status: Preparing</p>
+        </div>
+        <div class="order-items">
+          <p>Items:</p>
+          <ul class="item-list">
+          </ul>
+        </div>
+        <div class="order-total">
+          <p>Tax: <span class="taxPElement">₦0</span></p>
+          <p>Shipping: <span class="shippingPElement">₦0</span></p>
+          <p>Total: <span class="totalPElement"></span></p>
+        </div>
+      </div>
+    </section>
+  </main>
+  
+	<script type="module" src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule="" src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons/ionicons.js"></script>
+  <script type="module" src="../login.js" defer></script>
+  <script src="dashboard.js" type="module" defer></script>
+  <script src="../Main_page/admin_page/admin-sidebar.js"></script>
+</body>
+</html>

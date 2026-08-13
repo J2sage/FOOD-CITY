@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Food City</title>
+  <link rel="stylesheet" href="profile.css">
+  <link rel="stylesheet" href="responsivenes.css">
+  <link rel="shortcut icon" href="../../Main_page/icons/foodcityng_logo.jpg" sizes="532x32" type="image/x-icon">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+</head>
+<body>
+  <nav class="side-bar" id="sidebar">
+    <button class="sidebar-close" type="button" aria-label="Close sidebar">
+      <ion-icon name="close"></ion-icon>
+    </button>
+    <a href="../../index.html"><img src="../../Main_page/assets/foodcity-logo.png" alt="Food City Logo" class="logo"></a>
+    <ul>
+      <li><a href="./../index.html"><ion-icon name="menu"></ion-icon><span>Dashboard</span></a></li>
+      <li><a href="../../index.html"><ion-icon name="home"></ion-icon><span>Back to home</span></a></li>
+      <li><a href="../../Menu_page/index.html"><ion-icon name="grid"></ion-icon><span>Menu</span></a></li>
+      <li><a href="../order_page/order.html"><ion-icon name="cart"></ion-icon><span>Orders</span></a></li>
+      <li><a href="#profile" class="active"><ion-icon name="person"></ion-icon><span>Profile</span></a></li>
+    </ul>
+  </nav>
+  <main>
+    <div class="sidebar-overlay"></div>
+    
+    <section class="top">
+      <button class="sidebar-toggle" type="button" aria-label="Toggle sidebar">
+        <ion-icon name="menu"></ion-icon>
+      </button>
+      <div class="left">
+        <p class="initials">J</p>
+        <div class="user-info">
+          <p class="full-name">Jibril Balogun</p>
+          <p class="status">Customer</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="profile-header">
+      <div>
+        <h1>My Profile</h1>
+        <p>Manage your personal information and account settings</p>
+      </div>
+    </section>
+
+    <div class="profile-grid">
+      <div class="profile-card card-section">
+        <div class="profile-info-head">
+          <div class="avatar-wrap">
+            <img src="../../Main_page/assets/ASUN.jpg" alt="Profile Avatar">
+            <span class="avatar-action"><ion-icon name="camera"></ion-icon></span>
+          </div>
+          <div>
+            <p class="card-title">Profile Information</p>
+            <p class="card-subtitle">Update your personal details</p>
+          </div>
+        </div>
+        <div class="profile-info">
+          <div class="js-profile-info">
+            <div class="profile-field">
+              <label for="fullName">Full Name</label>
+              <input id="fullName" type="text" value="">
+            </div>
+            <div class="profile-field">
+              <label for="email">Email Address</label>
+              <input id="email" type="email" value="">
+            </div>
+            <div class="profile-field">
+              <label for="phone">Phone Number</label>
+              <input id="phone" type="tel" value="">
+            </div>
+          </div>
+          <button class="edit-button" type="button">Save Changes</button>
+        </div>
+
+        <h3>Password</h3>
+        <button class="change-password-btn">Change password</button>
+
+        <div class="password-wrapper ">
+          <div class="profile-field password-field">
+            <label for="currentpassword">Current Password</label>
+            <div class="input-with-icon">
+              <input id="current-password" class="password" type="password" value="">
+              <button class="toggle-password" type="button" aria-label="Show password">
+                <ion-icon name="eye"></ion-icon>
+              </button>
+            </div>
+          </div>
+          <p class="error-mssg">Current password is incorrect.</p>
+
+          <div class="profile-field password-field">
+            <label for="new-password">New Password</label>
+            <div class="input-with-icon">
+              <input id="new-password" class="password" type="password" value="">
+              <button class="toggle-password" type="button" aria-label="Show password">
+                <ion-icon name="eye"></ion-icon>
+              </button>
+            </div>
+          </div>
+          <div class="profile-field password-field">
+            <label for="new-password">Confirm New Password</label>
+            <div class="input-with-icon">
+              <input id="confirm-password" class="password" type="password" value="">
+              <button class="toggle-password" type="button" aria-label="Show password">
+                <ion-icon name="eye"></ion-icon>
+              </button>
+            </div>
+          </div>
+          <p class="error-new">New passwords do not match.</p>
+
+          <button class="save-password-btn" type="button">Save Password</button>
+        </div>
+      </div>
+
+      <section class="recent-orders card-section">
+       
+      </section>
+    </div>
+
+  </main>
+  
+	<script type="module" src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule="" src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons/ionicons.js"></script>
+  <script type="module" src="../../login.js" defer></script>
+  <script src="../../Main_page/admin_page/admin-sidebar.js"></script>
+  <script type="module" src="profile.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,115 @@
+@media (max-width: 900px) {
+  .logo img{
+    width: 100px;
+  }
+  .tab-links ul{
+    gap: 1em;
+    font-size: 0.8rem;
+  }
+   .tab-links .btn-1{
+    display: none;
+   }
+  
+  .hero{
+    flex-direction: column-reverse;
+  }
+  .text{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .text h1{
+    text-align: center;
+  }
+  .text > p{
+    width: 100%;
+    text-align: center;
+  }
+  .food-img{
+    width: 100%;
+  }
+  .menu-child{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding-bottom: 10px;
+  }
+  .food-img-div{
+    position: static;
+  }
+  .food-img-div > img {
+    width: 400px;
+  }
+  .location{
+    flex-direction: column;
+  }
+  .location-container, .location-image{
+    width: 100%;
+    max-width: 500px;
+  }
+  .loc-txt{
+    left: 50%;
+    bottom: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+@media (max-width: 490px) {
+  header .btn-1{
+    display: none;
+  }
+  .tab-links ul{
+    display: none;
+  }
+  .sidebar-control{
+    display: flex;
+    margin-left: 2em;
+  }
+  #close{
+    display: none;
+  }
+  .ham{
+    margin: 0;
+    max-height: 100vh;
+  }
+  .hero{
+    flex-direction: column-reverse;
+  }
+  .text{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .text > p{
+    width: 100%;
+  }
+  .food-img{
+    width: 100%;
+  }
+  .menu-child{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding-bottom: 10px;
+  }
+  .food-img-div{
+    position: static;
+  }
+  .food-img-div > img {
+    width: 270px;
+  }
+  .location-container, .location-image{
+    width: 100%;
+    max-width: 300px;
+  }
+  .location-image{
+    background-size: cover;
+  }
+  .location-image:hover{
+    background-size: 111%;
+    background-size: cover;
+  }
+}

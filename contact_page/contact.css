@@ -1,0 +1,135 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+  list-style: none;
+  font-family: "Poppins", serif;
+}
+body::-webkit-scrollbar{
+	display: none;
+}
+body{
+  background-color: rgb(255, 238, 232);
+}
+header{
+  padding: 10px 5%;
+  position:fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  z-index: 100;
+  background-color: white;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+.logo img{
+  width: 150px;
+  cursor: pointer;
+}
+main{
+  margin: 150px auto 0px;
+  padding: 20px 5%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 3em;
+}
+.text{
+  width: 50%;
+  margin-right: auto;
+}
+.text h1{
+  font-size: 3em;
+}
+.text > hr{
+  width: 10%;
+  border: 1px solid orangered;
+  margin-bottom: 20px;
+  min-width: 100px;
+}
+.text > p{
+  width: 70%;
+  line-height: 1.5;
+  min-width: 300px;
+  margin-bottom: 35px;
+}
+.card{
+  display: flex;
+  align-items: center;
+  gap: 1.5em;
+  margin-bottom: 30px;
+}
+.icons{
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(255, 206, 188);
+}
+.icon{
+  font-size: 2em;
+}
+
+.contact-form{
+  width: 50%;
+  background-color: rgb(255, 206, 188);
+  margin: auto;
+  padding: 30px;
+  border-radius: 10px;
+}
+.input-box{
+  margin-bottom: 20px;
+}
+.input-box label{
+  display: block;
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+.input-box input{
+  padding: 10px;
+  width: 100%;
+  outline: none;
+  font-size: 1em;
+  border-radius: 5px;
+  border: 1px solid grey;
+}
+.input-box input:focus, #message:focus{
+  border: 1px solid orangered;
+}
+.input-box textarea{
+  width: 100%;
+  height: 100px;
+  padding: 10px;
+  font-size: 1em;
+  outline: none;
+  border-radius: 5px;
+  border: 1px solid grey;
+}
+.contact-form button{
+  width: 100%;
+  display: block;
+  padding: 10px;
+  font-size: 1em;
+  font-family: 'Poppins';
+  border: none;
+  background-color: rgb(255, 238, 232);
+  color: orangered;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: all .5s ease-in;
+}
+.contact-form button:hover{
+  width: 95%;
+}
+
+@media (max-width:768px) {
+  main{
+    margin-top: 100px;
+    flex-direction: column;
+  }
+  .contact-form, .text{
+    width: 100%;
+  }
+}

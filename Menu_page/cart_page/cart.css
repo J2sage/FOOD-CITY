@@ -1,0 +1,261 @@
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+  list-style: none;
+  font-family: "Poppins", serif;
+}
+body::-webkit-scrollbar{
+	display: none;
+}
+body{
+  font-family: 'Poppins';
+}
+header{
+  display: flex;
+  padding: 15px 5%;
+  position:fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  z-index: 100;
+  background-color: white;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+header a{
+  display: flex;
+  align-items: center;
+	color: orangered;
+  font-size: 1.5rem;
+  font-family: 'Poppins';
+  transition: all .5s ease-in-out;
+  width: 40%;
+}
+header a:hover{
+  transform: translateX(-5px);
+}
+.logo img{
+  width: 150px;
+  cursor: pointer;
+	transition: all 0.5s ease-in-out;
+}
+.logo img:hover{
+	transform: translateX(-3px);
+}
+main{
+  margin: 7rem auto 0px;
+  padding:  30px 7%;
+  background-color: rgb(255, 249, 242);
+  position: relative;
+}
+.main_text{
+  width: 100px;
+  display: flex;
+  justify-content: space-between;
+}
+.main_text span{
+  color: orangered;
+  font-weight: bold;
+}
+.container{
+  margin-top: 30px;
+  background-color: white;
+  display: flex;
+  border-radius: 5px;
+}
+.cart-container{
+  width: 70%;
+  padding: 20px 20px;
+}
+.order{
+  width: 30%;
+  padding: 20px 0px 20px;
+}
+
+/* cart-container-styling */
+.cart-container-head{
+  display: grid;
+  grid-template-columns: 3fr 1fr 1fr 1fr 1fr;
+  justify-content: space-between;
+}
+.cart{
+  margin: 30px 0 20px;
+  display: grid;
+  grid-template-columns: 3fr 1fr 1fr 1fr 1fr;
+  align-items: center;
+}
+.product-info{
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.product-info img{
+  width: 80px;
+  border-radius: 10px;
+}
+.name{
+  font-size: 1em;
+  font-weight: 700;
+  color: orangered;
+}
+.quantity-head, .price-head, .total-head, .price, .total{
+  text-align: center;
+}
+.quantity{
+  border: 1px solid black;
+  /* width: 90%; */
+  padding: 2px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.quantity img{
+  cursor: pointer;
+}
+.stock{
+  color: green;
+}
+.delete-container{
+  display: flex;
+  justify-content: center;
+}
+.delete, .clear img{
+  width: 20px;
+  cursor: pointer;
+}
+.clear{
+  display: flex;
+  align-items: center;
+  padding: 5px 10px;
+  gap: 5px;
+  background-color: transparent;
+  border: 1px solid black;
+  cursor: pointer;
+  margin-top: 1.5em;
+}
+
+/* order styling */
+.order-container{
+  border: 1px solid grey;
+  padding: 10px;
+  width: 90%;
+  margin: auto;
+  border-radius: 5px;
+}
+.summary{
+  margin-bottom: 10px;
+}
+.summary-line{
+  margin-bottom: 30px;
+  border: 1px solid rgb(224, 223, 223);
+}
+.subtotal, .tax, .shipping, .afterTotal{
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  font-size: 1.2em;
+  margin-bottom: 15px;
+}
+.subtotal b, .tax b, .shipping b, .afterTotal b{
+  margin-right: auto;
+}
+.order-container hr:last-of-type{
+  margin-bottom: 20px;
+}
+.afterTotal span{
+  font-weight: bold;
+}
+.checkout_btn{
+  display: block;
+  width: 100%;
+  padding: 10px;
+  background-color: black;
+  color: white;
+  font-weight: bold;
+  border: none;
+  outline: none;
+  border-radius: 5px;
+  transition: all .5s ease-in-out;
+}
+.checkout_btn:hover{
+  background-color: green;
+  transform: translateY(3px);
+}
+
+/* remove-container styling */
+.show{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.6);
+}
+.remove-container{
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  border: 2px solid orangered;
+  padding: 15px;
+  border-radius: 5px;
+  min-width: 300px;
+  pointer-events: auto;
+  z-index: 200;
+}
+.no-scroll{
+  overflow: hidden;
+  pointer-events: none;
+}
+.remove-container h3{
+  font-size: 1.2em;
+  padding-bottom: 5px;
+  /* cursor: ; */
+}
+.remove-container hr{
+  margin-bottom: 10px;
+  border: 1px solid rgb(224, 223, 223);
+}
+.remove-container > p{
+  font-size: 1.2em;
+}
+.remove-img-container{
+  display: flex;
+  justify-content: center;
+  margin: 20px auto 20px;
+}
+.remove-img{
+  width: 80px;
+  border-radius: 10px;
+}
+.confirmation{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+.cancel, .confirm{
+  width: 50%;
+  border: 1px solid orangered;
+  cursor: pointer;
+  text-align: center;
+  padding: 10px;
+  border-radius: 20px;
+  color: orangered;
+  transition: all .5s ease-in-out;
+}
+.confirm{
+  background-color: orangered;
+  color: white;
+}
+.cancel:hover{
+  background-color: rgb(255, 164, 131);
+  color: white;
+}
+.confirm:hover{
+  opacity: 0.8;
+}

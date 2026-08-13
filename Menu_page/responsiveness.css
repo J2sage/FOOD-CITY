@@ -1,0 +1,72 @@
+@media (max-width: 780px) {
+  .sidebar-control{
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+  }
+  #close{
+    display: none;
+  }
+  .first_head{
+    gap: 2em;
+  }
+  .logo img{
+    width: 100px;
+  }
+  .first_head ul{
+    display: none;
+  }
+  .food_type{
+    display: none;
+  }
+  .grid_head{
+    flex-direction: column;
+    align-items: center;
+    row-gap: 1em;
+  }
+  .grid_cards{
+    justify-content: center;
+  }
+  .card1{
+    width: 100%;
+    max-width: 350px;
+    min-width: 300px;
+  }
+  .card1 img{
+    width: 90%;
+    height: 100%;
+  }
+}
+@media (max-width: 500px) {
+  .first_head input{
+    display: none;
+  }
+  .mini-search{
+    display: flex;
+    z-index: 90;
+  }
+  .login-box{
+    width: 100%;
+    max-width: 400px;
+  }
+  .input-box{
+    width: 100%;
+    min-width: 260px;
+    max-width: 310px;
+  }
+  .grid_head{
+    flex-direction: column;
+    align-items: center;
+    row-gap: 1em;
+  }
+  .grid_cards{
+    justify-content: center;
+  }
+  .card1{
+    width: 80%;
+  }
+  .card1 img{
+    width: 90%;
+    height: 100%;
+  }
+}

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Food-city</title>
+	<link rel="shortcut icon" href="../Main_page/icons/foodcityng_logo.jpg" sizes="532x32" type="image/x-icon">
+	<link rel="stylesheet" href="style.css">
+	<link rel="stylesheet" href="../Main_page/footer.css">
+	<link rel="stylesheet" href="../login.css">
+	<link rel="stylesheet" href="responsiveness.css">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+</head>
+<body>
+	<header class="head">
+		<section class="first_head">
+			<div class="logo">
+      <a href="../index.html"><img src="assets/foodcity-logo.png" alt="Food City Logo"></a>
+			</div>
+			<input type="search" id="live-search" placeholder="Search Items">
+			<ul>
+				<li><a href="../about_page/about.html"><img src="./icons/info-icon.svg" alt=""> Info</a></li>
+				<li class="categories"><a href="#"><img src="./icons/categories-icon.svg" alt=""> Categories</a></li>
+				<li><a href="cart_page/cart.html" class="cart"><img src="./icons/cart-icon.svg" alt="">Cart <span id="cart-quantity"></span></a></li>
+				<li class="log-in"><a href="#"><img src="./icons/login-icon.svg" alt=""><span class="login-span">Login</span></a></li>
+			</ul>
+			<div class="sidebar-control">
+				<img src="icons/icon-hamburger.svg" id="menu" alt="menu-icon">
+				<img src="icons/icon-close.svg" id="close" alt="close-icon">
+			</div>
+		</section>
+		<div class="ham">
+      <ul class="small-nav">
+				<li><a href="../index.html">HOME</a></li>
+        <li><a href="../Menu_page/index.html">MENU</a></li>
+        <li><a href="cart_page/cart.html">CART</a></li>
+        <li class="log-in"><a href="#">LOGIN</a></li>
+      </ul>
+    </div>
+	</header>
+	<div class="mini-search">
+		<input type="search" id="live-search" placeholder="Search Items">
+	</div>
+	<!-- <nav class="food_type">
+		<ul>
+			<li><a href="#">SCRUMPTIOUS BREA</a></li>
+			<li><a href="#">GRAINS</a></li>
+			<li><a href="#">AFRICANA</a></li>
+			<li><a href="#">PROTEINS</a></li>
+			<li><a href="#">PASTERIES & CAKES</a></li>
+			<li><a href="#">SIDES</a></li>
+			<li><a href="#">SOUPS</a></li>
+			<li><a href="#">PACKAGING</a></li>
+			<img src="" alt="">
+		</ul>
+  </nav> -->
+
+	<section class="login-box">
+		
+	</section>
+
+	<main>
+		<section class="remove-container-backdrop">
+      
+    </section>
+		<section class="grid">
+			<div class="grid_head">
+				<h1>All Items</h1>
+				<div class="head_btn">
+					<p><span>GRID VIEW</span><img src="./icons/grid-icon.svg" alt=""></p>
+					<p><span>RECOMMENDED</span><img src="./icons/rec-icon.svg" alt=""></p>
+				</div>
+			</div>
+			<div class="grid_cards">
+				
+			</div>
+		</section>
+
+		<section class="Booking">
+      <h1>MAKE AN ORDER</h1>
+      <p>
+        You don't want to waste time waiting in line?, then ordering is the best option
+      </p>
+      <button type="button" class="last-button">PLACE AN ORDER</button>
+    </section>
+
+	</main>
+
+	<footer class="home_footer">
+    <div class="left-footer">
+      <img src="assets/foodcity-logo.png" width="150px">
+      <p>Restaurant beyond the ordinary</p>
+      <div class="icon">
+        <img src="../Main_page/icons/fb-icon.svg" alt="">
+        <img src="../Main_page/icons/ig-icon copy.svg" alt="">
+        <img src="../Main_page/icons/what-icon.svg" alt="">    
+      </div>
+    </div>
+    <div class="right-footer">
+      <h3>Contact</h3>
+      <p>Town planning way.</p>
+      <p>+(234) 811 100 1111</p>
+      <p>admin@foodcity.com</p>
+    </div>
+  </footer>
+
+	<script type="module" src="script/menu.js"></script>
+  <script type="module" src="../login.js"></script>
+	<script type="module" src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons/ionicons.esm.js"></script>
+	<script nomodule="" src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons/ionicons.js"></script>
+</body>
+</html>
