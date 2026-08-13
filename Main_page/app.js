@@ -73,8 +73,7 @@ function starCount(rating) {
 }
 
 function reviewAuthor(review) {
-  const currentUser = JSON.parse(localStorage.getItem('currentUser') || 'null');
-  return currentUser.name
+  return review.userName
 }
 
 function renderReviews(data) {
