@@ -171,6 +171,14 @@ savePasswordBtn?.addEventListener('click', () => {
    API PASSWORD FLOW — ACTIVE
    ============================================================
 */
+
+const passwordWrapper = document.querySelector('.password-wrapper');
+changePasswordBtn?.addEventListener('click', () => {
+  
+  passwordWrapper?.classList.toggle('show');
+  changePasswordBtn?.classList.toggle('active');
+})
+
 savePasswordBtn?.addEventListener('click', async () => {
   const errorMessage = document.querySelector('.error-mssg');
   const errorNewMessage = document.querySelector('.error-new');
