@@ -88,15 +88,15 @@
     </section>
   </main>
 
-  <div class="modal-backdrop" id="delete-customer-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="delete-customer-title">
+  <div class="modal-backdrop" id="customer-status-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="customer-status-title">
     <div class="confirm-modal">
-      <button type="button" class="modal-close js-cancel-delete" aria-label="Close confirmation dialog"><ion-icon name="close"></ion-icon></button>
-      <div class="modal-icon"><ion-icon name="trash"></ion-icon></div>
-      <h2 id="delete-customer-title">Delete customer account?</h2>
-      <p>This will permanently delete <strong class="js-delete-customer-name"></strong>. This action cannot be undone.</p>
+      <button type="button" class="modal-close js-cancel-status-change" aria-label="Close confirmation dialog"><ion-icon name="close"></ion-icon></button>
+      <div class="modal-icon"><ion-icon name="pause"></ion-icon></div>
+      <h2 id="customer-status-title">Suspend customer account?</h2>
+      <p class="js-customer-status-message">This will suspend the customer. They will not be able to use their account until it is reactivated.</p>
       <div class="modal-actions">
-        <button type="button" class="modal-cancel js-cancel-delete">No, keep account</button>
-        <button type="button" class="modal-confirm js-confirm-delete">Yes, delete</button>
+        <button type="button" class="modal-cancel js-cancel-status-change">Cancel</button>
+        <button type="button" class="modal-confirm js-confirm-status-change">Yes, suspend</button>
       </div>
     </div>
   </div>

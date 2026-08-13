@@ -65,7 +65,3 @@ export function updateCustomerActive(customerId, active) {
     body: JSON.stringify({ active })
   });
 }
-
-export function deleteCustomer(customerId) {
-  return adminRequest(`/customers/${customerId}`, { method: 'DELETE' });
-}

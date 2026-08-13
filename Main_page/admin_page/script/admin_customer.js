@@ -1,4 +1,4 @@
-import { deleteCustomer, getCustomersFromApi } from '../../../data/admin-api.js';
+import { getCustomersFromApi, updateCustomerActive } from '../../../data/admin-api.js';
 
 /* ============================================================
    LOCAL ADMIN CUSTOMER FLOW — COMMENTED OUT FOR COMPARISON
@@ -15,12 +15,13 @@ const selectedStatus = document.getElementById('selected-status');
 const searchInputElement = document.getElementById('search-input');
 const filterButton = document.getElementsByClassName('secondary-btn')[0];
 const refreshButton = document.querySelector('.add-item-btn');
-const deleteModal = document.getElementById('delete-customer-modal');
-const deleteModalCustomerName = document.querySelector('.js-delete-customer-name');
-const cancelDeleteButton = document.querySelector('.js-cancel-delete');
-const confirmDeleteButton = document.querySelector('.js-confirm-delete');
+const statusModal = document.getElementById('customer-status-modal');
+const statusModalTitle = document.getElementById('customer-status-title');
+const statusModalMessage = document.querySelector('.js-customer-status-message');
+const cancelStatusChangeButton = document.querySelector('.js-cancel-status-change');
+const confirmStatusChangeButton = document.querySelector('.js-confirm-status-change');
 let customers = [];
-let customerToDelete = null;
+let customerStatusChange = null;
 
 function setCustomersLoading(isLoading) {
   if (filterButton) filterButton.disabled = isLoading;
@@ -35,15 +36,7 @@ function setCustomersLoading(isLoading) {
   }
 }
 
-function isCustomerActive(customer) {
-  const orders = Array.isArray(customer.orders) ? customer.orders : null;
-  if (orders) {
-    return orders.some((order) => String(order.status || '').trim().toLowerCase() !== 'delivered');
-  }
-  // The customers endpoint returns this value after applying the same rule
-  // when it does not include the customer's orders in the response.
-  return Boolean(customer.active);
-}
+const isCustomerActive = (customer) => Boolean(customer.active);
 
 const showNoResults = () => {
   if (customerBodyElement) customerBodyElement.innerHTML = '<tr><td colspan="6">No matching customers</td></tr>';
@@ -60,7 +53,7 @@ function renderCustomerDetails(list) {
         <td>${customer.phone || ''}</td>
         <td>${customer.totalOrders || 0}</td>
         <td><span class="status-badge ${status}"><ion-icon name="checkmark-circle"></ion-icon> ${status}</span></td>
-        <td class="action-buttons"><button type="button" aria-label="Delete ${customer.name}" class="delete-customer" data-customer-id="${customer.id}" data-customer-name="${customer.name}"><ion-icon name="trash"></ion-icon></button></td>
+        <td class="action-buttons"><button type="button" aria-label="${status === 'active' ? 'Suspend' : 'Reactivate'} ${customer.name}" class="customer-status-action ${status}" data-customer-id="${customer.id}"><ion-icon name="${status === 'active' ? 'pause' : 'play'}"></ion-icon><span>${status === 'active' ? 'Suspend' : 'Reactivate'}</span></button></td>
       </tr>
     `;
   }).join('');
@@ -86,51 +79,58 @@ filterButton?.addEventListener('click', loadCustomers);
 searchInputElement?.addEventListener('input', loadCustomers);
 refreshButton?.addEventListener('click', loadCustomers);
 
-function closeDeleteModal() {
-  customerToDelete = null;
-  deleteModal?.classList.remove('is-open');
-  deleteModal?.setAttribute('aria-hidden', 'true');
-  if (deleteModal) deleteModal.style.display = 'none';
+function closeStatusModal() {
+  customerStatusChange = null;
+  statusModal?.classList.remove('is-open');
+  statusModal?.setAttribute('aria-hidden', 'true');
+  if (statusModal) statusModal.style.display = 'none';
 }
 
-function openDeleteModal(customer) {
-  customerToDelete = customer;
-  if (deleteModalCustomerName) deleteModalCustomerName.textContent = customer.name;
-  deleteModal?.classList.add('is-open');
-  deleteModal?.setAttribute('aria-hidden', 'false');
-  if (deleteModal) deleteModal.style.display = 'flex';
-  confirmDeleteButton?.focus();
+function openStatusModal(customer) {
+  const nextActive = !isCustomerActive(customer);
+  customerStatusChange = { customer, nextActive };
+  const action = nextActive ? 'Reactivate' : 'Suspend';
+  if (statusModalTitle) statusModalTitle.textContent = `${action} customer account?`;
+  if (statusModalMessage) statusModalMessage.textContent = nextActive
+    ? `This will reactivate ${customer.name}. They will be able to use their account again.`
+    : `This will suspend ${customer.name}. They will not be able to use their account until it is reactivated.`;
+  if (confirmStatusChangeButton) confirmStatusChangeButton.textContent = `Yes, ${action.toLowerCase()}`;
+  statusModal?.classList.add('is-open');
+  statusModal?.setAttribute('aria-hidden', 'false');
+  if (statusModal) statusModal.style.display = 'flex';
+  confirmStatusChangeButton?.focus();
 }
 
-cancelDeleteButton?.addEventListener('click', closeDeleteModal);
-deleteModal?.addEventListener('click', (event) => {
-  if (event.target === deleteModal) closeDeleteModal();
+cancelStatusChangeButton?.addEventListener('click', closeStatusModal);
+statusModal?.addEventListener('click', (event) => {
+  if (event.target === statusModal) closeStatusModal();
 });
 document.addEventListener('keydown', (event) => {
-  if (event.key === 'Escape' && deleteModal?.classList.contains('is-open')) closeDeleteModal();
+  if (event.key === 'Escape' && statusModal?.classList.contains('is-open')) closeStatusModal();
 });
 
-confirmDeleteButton?.addEventListener('click', async () => {
-  if (!customerToDelete) return;
-  confirmDeleteButton.disabled = true;
-  confirmDeleteButton.innerHTML = '<span class="loading-spinner" aria-hidden="true"></span> Deleting...';
+confirmStatusChangeButton?.addEventListener('click', async () => {
+  if (!customerStatusChange) return;
+  const { customer, nextActive } = customerStatusChange;
+  confirmStatusChangeButton.disabled = true;
+  confirmStatusChangeButton.innerHTML = `<span class="loading-spinner" aria-hidden="true"></span> ${nextActive ? 'Reactivating' : 'Suspending'}...`;
   try {
-    await deleteCustomer(customerToDelete.id);
-    closeDeleteModal();
+    await updateCustomerActive(customer.id, nextActive);
+    closeStatusModal();
     await loadCustomers();
   } catch (error) {
-    alert(error.message || 'Could not delete customer account.');
+    alert(error.message || 'Could not update customer account status.');
   } finally {
-    confirmDeleteButton.disabled = false;
-    confirmDeleteButton.textContent = 'Yes, delete';
+    confirmStatusChangeButton.disabled = false;
+    confirmStatusChangeButton.textContent = `Yes, ${nextActive ? 'reactivate' : 'suspend'}`;
   }
 });
 
 document.addEventListener('click', (event) => {
-  const deleteButton = event.target instanceof Element ? event.target.closest('.delete-customer') : null;
-  if (!deleteButton) return;
-  const customer = customers.find((item) => String(item.id) === deleteButton.dataset.customerId);
-  if (customer) openDeleteModal(customer);
+  const statusButton = event.target instanceof Element ? event.target.closest('.customer-status-action') : null;
+  if (!statusButton) return;
+  const customer = customers.find((item) => String(item.id) === statusButton.dataset.customerId);
+  if (customer) openStatusModal(customer);
 });
 
 loadCustomers();

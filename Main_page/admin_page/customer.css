@@ -272,10 +272,23 @@ td {
 .action-buttons button:hover {
   background: #e2e8f0;
 }
-.action-buttons .delete-customer {
-  color: #b91c1c;
+.action-buttons .customer-status-action {
+  width: auto;
+  padding: 0 12px;
+  color: #b45309;
+  font-size: 12px;
+  font-weight: 600;
 }
-.action-buttons .delete-customer:hover {
+.action-buttons .customer-status-action:hover {
+  background: #fef3c7;
+}
+.action-buttons .customer-status-action.inactive {
+  color: #166534;
+}
+.action-buttons .customer-status-action.inactive:hover {
+  background: #dcfce7;
+}
+.action-buttons .customer-status-action.active:hover {
   background: #fee2e2;
 }
 .status-badge {

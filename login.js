@@ -9,77 +9,77 @@ const menuLink = document.getElementById('menu-link');
 
 if (logInBox) {
   logInBox.innerHTML = `
-      <!-- LOGIN FORM CONTAINER -->
-      <div class="form-container login-form-wrapper">
-        <form id="login-form" action="">
-          <ion-icon name="close" class="modal-close" id="login-close"></ion-icon>
-          <h2>Login</h2>
-          <div class="input-box">
-            <span class="icon"><ion-icon name="mail"></ion-icon></span>
-            <input id="login-email" name="email" class="username" type="email" autocomplete="email" required>
-            <label for="login-email">Email</label>
-          </div>
-          <div class="input-box">
-            <span class="icon"><ion-icon name="lock"></ion-icon></span>
-            <input id="login-password" name="password" type="password" class="password" autocomplete="current-password" required>
-            <label for="login-password">Password</label>
-          </div>
-          <div class="remember-forget">
-            <label for="remember-me"><input id="remember-me" name="rememberMe" type="checkbox">Remember me</label>
-            <a href="#">Forgot Password?</a>
-          </div>
-          <button type="submit" class="btn">Login</button>
-          <div class="register-link">
-            <p>Don't have an account? <a href="#" id="go-to-register">Register</a></p>
-          </div>
-        </form>
-      </div>
+    <!-- LOGIN FORM CONTAINER -->
+    <div class="form-container login-form-wrapper">
+      <form id="login-form" action="">
+        <ion-icon name="close" class="modal-close" id="login-close"></ion-icon>
+        <h2>Login</h2>
+        <div class="input-box">
+          <span class="icon"><ion-icon name="mail"></ion-icon></span>
+          <input id="login-email" name="email" class="username" type="email" autocomplete="email" required>
+          <label for="login-email">Email</label>
+        </div>
+        <div class="input-box">
+          <span class="icon"><ion-icon name="lock"></ion-icon></span>
+          <input id="login-password" name="password" type="password" class="password" autocomplete="current-password" required>
+          <label for="login-password">Password</label>
+        </div>
+        <div class="remember-forget">
+          <label for="remember-me"><input id="remember-me" name="rememberMe" type="checkbox">Remember me</label>
+          <a href="#">Forgot Password?</a>
+        </div>
+        <button type="submit" class="btn">Login</button>
+        <div class="register-link">
+          <p>Don't have an account? <a href="#" id="go-to-register">Register</a></p>
+        </div>
+      </form>
+    </div>
 
-      <!-- REGISTER FORM CONTAINER (Hidden by default via CSS) -->
-      <div class="form-container register-form-wrapper" style="display: none;">
-        <form id="register-form" action="">
-          <ion-icon name="close" class="modal-close" id="register-close"></ion-icon>
-          <h2>Registration</h2>
-          <div class="input-box">
-            <span class="icon"><ion-icon name="person"></ion-icon></span>
-            <input id="register-name" name="name" class="reg-fullname" type="text" autocomplete="name" required>
-            <label for="register-name">Full Name</label>
-          </div>
+    <!-- REGISTER FORM CONTAINER (Hidden by default via CSS) -->
+    <div class="form-container register-form-wrapper" style="display: none;">
+      <form id="register-form" action="">
+        <ion-icon name="close" class="modal-close" id="register-close"></ion-icon>
+        <h2>Registration</h2>
+        <div class="input-box">
+          <span class="icon"><ion-icon name="person"></ion-icon></span>
+          <input id="register-name" name="name" class="reg-fullname" type="text" autocomplete="name" required>
+          <label for="register-name">Full Name</label>
+        </div>
 
-          <div class="input-box">
-            <span class="icon"><ion-icon name="mail"></ion-icon></span>
-            <input id="register-email" name="email" class="reg-email" type="email" autocomplete="email" required>
-            <label for="register-email">Email</label>
-          </div>
+        <div class="input-box">
+          <span class="icon"><ion-icon name="mail"></ion-icon></span>
+          <input id="register-email" name="email" class="reg-email" type="email" autocomplete="email" required>
+          <label for="register-email">Email</label>
+        </div>
 
-          <div class="input-box">
-            <span class="icon"><ion-icon name="call"></ion-icon></span>
-            <input id="register-phone" name="phone" class="reg-phone" type="tel" autocomplete="tel" inputmode="tel" required>
-            <label for="register-phone">Phone Number</label>
-          </div>
-          
-          <div class="input-box">
-            <span class="icon"><ion-icon name="lock"></ion-icon></span>
-            <input id="register-password" name="password" type="password" class="reg-password" autocomplete="new-password" required>
-            <label for="register-password">Password</label>
-          </div>
-          <button type="submit" class="btn">Register</button>
-          <div class="register-link">
-            <p>Already have an account? <a href="#" id="go-to-login">Login</a></p>
-          </div>
-        </form>
-      </div>
+        <div class="input-box">
+          <span class="icon"><ion-icon name="call"></ion-icon></span>
+          <input id="register-phone" name="phone" class="reg-phone" type="tel" autocomplete="tel" inputmode="tel" required>
+          <label for="register-phone">Phone Number</label>
+        </div>
+        
+        <div class="input-box">
+          <span class="icon"><ion-icon name="lock"></ion-icon></span>
+          <input id="register-password" name="password" type="password" class="reg-password" autocomplete="new-password" required>
+          <label for="register-password">Password</label>
+        </div>
+        <button type="submit" class="btn">Register</button>
+        <div class="register-link">
+          <p>Already have an account? <a href="#" id="go-to-login">Login</a></p>
+        </div>
+      </form>
+    </div>
   `;
-  
+
   // Bind Event Listeners immediately after injection
   document.getElementById('login-close')?.addEventListener('click', closeLoginModal);
   document.getElementById('register-close')?.addEventListener('click', closeLoginModal);
-  
+
   // UI Panel Toggles
   document.getElementById('go-to-register')?.addEventListener('click', (e) => {
     e.preventDefault();
     showRegisterPanel();
-});
+  });
   document.getElementById('go-to-login')?.addEventListener('click', (e) => {
     e.preventDefault();
     showLoginPanel();
@@ -250,7 +250,7 @@ function toggleMenuLink(user = null) {
 function protectMenuPage(user = null) {
   const isMenuPage = window.location.pathname.includes('/Menu_page/');
   if (isMenuPage && user?.role === 'admin') {
-      window.location.href = '../Main_page/admin_page/admin.html';
+    window.location.href = '../Main_page/admin_page/admin.html';
   }
 }
 
@@ -328,23 +328,23 @@ async function logIn(event) {
 document.querySelector('.logout-btn')?.addEventListener('click', logOut);
 
 function getHomePagePath() {
-    const path = window.location.pathname.toLowerCase();
-    if (path.includes('/dashboard/order_page/')) return '../../index.html';
-    if (path.includes('/dashboard/')) return '../index.html';
-    if (path.includes('/main_page/admin_page/')) return '../../index.html';
-    if (path.includes('/main_page/')) return '../index.html';
-    if (path.includes('/menu_page/')) return '../index.html';
-    return 'index.html';
+  const path = window.location.pathname.toLowerCase();
+  if (path.includes('/dashboard/order_page/')) return '../../index.html';
+  if (path.includes('/dashboard/')) return '../index.html';
+  if (path.includes('/main_page/admin_page/')) return '../../index.html';
+  if (path.includes('/main_page/')) return '../index.html';
+  if (path.includes('/menu_page/')) return '../index.html';
+  return 'index.html';
 }
 
 function logOut() {
-    localStorage.removeItem('currentUser');
-    localStorage.removeItem('authToken');
-    updateLoginLabel();
-    updatedashBoardLabel();
-    renderInfo();
-    toggleMenuLink();
-    window.location.replace(getHomePagePath());
+  localStorage.removeItem('currentUser');
+  localStorage.removeItem('authToken');
+  updateLoginLabel();
+  updatedashBoardLabel();
+  renderInfo();
+  toggleMenuLink();
+  window.location.replace(getHomePagePath());
 }
 
 // Intercept Login navigation button clicks
@@ -389,7 +389,7 @@ export function updateProfile({ fullName, email, phoneNumber, password }) {
 
 // Dynamic Global Alert Modal Trigger
 export function showAlertModal(title, message, iconName = 'alert-circle') {
-  
+
   if (document.querySelector('.alert-modal-wrapper')) return;
 
   backdrop?.classList.add('show');
@@ -407,7 +407,7 @@ export function showAlertModal(title, message, iconName = 'alert-circle') {
   alertContainer.querySelector('.alert-btn').addEventListener('click', () => {
     alertContainer.remove();
     if (logInBox && logInBox.style.display === 'flex') {
-      closeLoginModal(); 
+      closeLoginModal();
     } else {
       backdrop?.classList.remove('show');
       document.body.classList.remove('no-scroll');

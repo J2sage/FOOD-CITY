@@ -73,7 +73,7 @@ function starCount(rating) {
 }
 
 function reviewAuthor(review) {
-  return review.userName
+  return review.userName;
 }
 
 function renderReviews(data) {
