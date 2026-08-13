@@ -133,3 +133,64 @@ main{
     width: 100%;
   }
 }
+
+.alert-modal-wrapper {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%;
+  max-width: 360px;
+  background: #ffffff;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  z-index: 10001; /* Must sit higher than backdrop */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+	pointer-events: auto;
+  animation: modalScaleIn 0.3s ease-out forwards;
+}
+
+.alert-modal-wrapper ion-icon {
+  font-size: 45px;
+  color: #ff4d4d; /* Soft red for warning */
+}
+
+.alert-modal-wrapper h3 {
+  font-size: 1.2rem;
+  margin: 0;
+  color: #333;
+}
+
+.alert-modal-wrapper p {
+  font-size: 0.95rem;
+  color: #666;
+  margin: 0;
+  line-height: 1.4;
+}
+
+.alert-modal-wrapper .alert-btn {
+  background: #333;
+  color: #fff;
+  border: none;
+  padding: 10px 24px;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  width: 100%;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.alert-modal-wrapper .alert-btn:hover {
+  background: #000;
+}
+
+@keyframes modalScaleIn {
+  from { opacity: 0; transform: translate(-50%, -45%) scale(0.95); }
+  to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+}

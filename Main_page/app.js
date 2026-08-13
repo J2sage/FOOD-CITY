@@ -54,8 +54,7 @@ if (reviewSection) {
 
 
 
-// Additional comments are stored and retrieved through the reviews API.
-const fullName = document.querySelector('.F-name');
+
 const extraComment = document.querySelector('.extra-comment');
 const reviewRating = document.querySelector('.review-rating');
 const additionalReviews = document.querySelector('.additional');
@@ -74,7 +73,8 @@ function starCount(rating) {
 }
 
 function reviewAuthor(review) {
-  return review.fullName || review.name || review.user?.name || review.user?.fullName || 'Food City customer';
+  const currentUser = JSON.parse(localStorage.getItem('currentUser') || 'null');
+  return currentUser.name
 }
 
 function renderReviews(data) {
@@ -108,19 +108,17 @@ async function loadReviews() {
 
 if (postBtn) {
   postBtn.addEventListener('click', async () => {
-    const name = fullName.value.trim();
     const comment = extraComment.value.trim();
     const rating = Number(reviewRating.value);
 
-    if (!name || !comment || !Number.isFinite(rating) || rating < 1 || rating > 5) {
-      showAlertModal('Error', 'Enter your name, comment, and a rating from 1.0 to 5.0.', 'person-add-outline') 
+    if (!comment || !Number.isFinite(rating) || rating < 1 || rating > 5) {
+      showAlertModal('Error', 'Enter your comment, and a rating from 1.0 to 5.0.', 'person-add-outline') 
       return;
     }
 
     try {
       postBtn.disabled = true;
       await createReviewWithApi({ comment, rating });
-      fullName.value = '';
       extraComment.value = '';
       reviewRating.value = '';
       await loadReviews();

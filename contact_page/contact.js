@@ -1,3 +1,5 @@
+import { showAlertModal  } from "../login.js";
+
 const nameElement = document.getElementById('name');
 const emailElement = document.getElementById('email');
 const messageElement = document.getElementById('message');
@@ -10,14 +12,18 @@ if(nameElement && emailElement && messageElement && submitButton){
     { 
       e.preventDefault();
       sendToMail(nameElement.value, emailElement.value, messageElement.value); 
+
+      nameElement.value = '';
+      emailElement.value = '';
+      messageElement.value = '';
     } else {
-      alert('Please fill in all fields');
+      showAlertModal('Error', 'Please fill in all fields.', 'person-add-outline');
     }
   })
 }
 
 function sendToMail(name, email, messages){
-  const mail = 'jibrilbalogun15@gmail.com';
+  const recipent = 'jibrilbalogun15@gmail.com'; 
 
   let message = `Name: \n`;
   message+= `${name}\n`;
@@ -33,5 +39,7 @@ function sendToMail(name, email, messages){
   const encodedMessage = encodeURIComponent(message);
   const subject = encodeURIComponent("New Contact Form Submission");
   
-  window.location.href = `mailto:${mail}?subject=${subject}&body=${encodedMessage}`;
+  const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${recipent}&su=${subject}&body=${encodedMessage}`;
+
+  window.open(gmailUrl, '_blank');
 }
