@@ -2,7 +2,7 @@
 
 import { loginUserWithApi, registerUserWithApi, updateProfileWithApi } from './data/auth-api.js';
 
-const logInBox = document.querySelector('.login-box');
+export const logInBox = document.querySelector('.login-box');
 const backdrop = document.querySelector('.remove-container-backdrop');
 const menuLink = document.getElementById('menu-link');
 
@@ -112,7 +112,7 @@ export function openLoginModal() {
   }
 }
 
-function closeLoginModal() {
+export function closeLoginModal() {
   if (logInBox) {
     logInBox.style.display = 'none';
   }
@@ -228,7 +228,7 @@ async function createAccount(event) {
   }
 }
 
-function updateLoginLabel(user = null) {
+export function updateLoginLabel(user = null) {
   document.querySelectorAll('.login-span').forEach((span) => {
     span.textContent = user ? user.username : 'LOGIN';
   });
@@ -240,7 +240,7 @@ export function updatedashBoardLabel(user = null) {
   });
 }
 
-function toggleMenuLink(user = null) {
+export function toggleMenuLink(user = null) {
   if (menuLink) {
     const shouldHide = !!user && user.role === 'admin';
     menuLink.style.display = shouldHide ? 'none' : '';
@@ -254,11 +254,11 @@ function protectMenuPage(user = null) {
   }
 }
 
-function redirectBasedOnRole(user) {
+export function redirectBasedOnRole(user) {
   if (!user) return;
   toggleMenuLink(user);
-  const redirectPath = user.role === 'admin' ? '../Main_page/admin_page/admin.html' : '../dashboard/index.html';
-  window.location.href = redirectPath;
+  // const redirectPath = user.role === 'admin' ? '../Main_page/admin_page/admin.html' : '../dashboard/index.html';
+  window.location.href = `../dashboard/index.html`;
 }
 
 /* ============================================================
@@ -305,16 +305,22 @@ async function logIn(event) {
   try {
     const { token, user } = await loginUserWithApi({ email, password });
 
-    // This stores the API session, not the old mock users database.
-    localStorage.setItem('authToken', token);
-    localStorage.setItem('currentUser', JSON.stringify(user));
+    if (user.role === 'admin') {
+      showAlertModal('Warning!', 'Please use the administrator login..', 'person-add-outline');
+    }else{
+      
 
-    updateLoginLabel(user);
-    updatedashBoardLabel(user);
-    toggleMenuLink(user);
-    closeLoginModal();
-    renderInfo(user);
-    redirectBasedOnRole(user);
+      // This stores the API session, not the old mock users database.
+      localStorage.setItem('authToken', token);
+      localStorage.setItem('currentUser', JSON.stringify(user));
+
+      updateLoginLabel(user);
+      updatedashBoardLabel(user);
+      toggleMenuLink(user);
+      closeLoginModal();
+      renderInfo(user);
+      redirectBasedOnRole(user);
+    }
   } catch (error) {
     if (error.message?.toLowerCase().includes('not found') || error.message?.toLowerCase().includes('exist')) {
       showAlertModal('Account Not Found', 'This account does not exist. Please check your credentials or register an account.', 'person-add-outline');
